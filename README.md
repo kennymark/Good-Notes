@@ -56,14 +56,14 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 
 # To-do
 
-* Search Feature
-* Add way to edit
-* Add more routes
-* Front-end validation
-* Mobile version
-* Modal to edit the info
-* File Upload
-* Maybe a quill like editor: implemented earlier but had to remove due to issues
+- [x] Search Feature
+- [x] Add way to edit
+- [ ] Add more routes
+- [x] Front-end validation
+- [ ] Mobile version
+- [x] Modal to edit the info
+- [ ] File Upload
+- [ ] Maybe a quill like editor: implemented earlier but had to remove due to issues
 
 ## Components
 

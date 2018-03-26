@@ -64,6 +64,7 @@ input {
 }
 
 .user {
+  min-width: 100px;
   margin-right: 20px;
   font-size: 17px;
 }
@@ -124,6 +125,7 @@ input {
   justify-content: center;
   align-items: center;
   overflow: hidden;
+  height: 300px;
 }
 
 .note .title {
@@ -131,6 +133,7 @@ input {
   top: 10px;
   width: 80%;
   font-size: 22px;
+  color: #8981d8;
 }
 .note .content {
   padding: 0 20px;
@@ -211,7 +214,7 @@ input {
 .editor {
   margin: 0px;
   height: 588px;
-  width: 879px;
+  width: 95.5%;
   border: 1px solid #efefef;
   outline: none;
   padding: 20px;
@@ -225,6 +228,8 @@ input {
   padding: 10px;
   font-weight: bold;
   cursor: pointer;
+  min-width: 69px;
+  margin-right: 10px;
 }
 .btnout:hover {
   transition: background 0.5s ease;
@@ -235,4 +240,12 @@ input {
   margin-right: 25px;
   margin-top: -50px;
   color: red;
+}
+.delete:hover{
+  transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(1.5)
+}
+.singlenote {
+  color: none;
+  text-decoration: none;
 }
