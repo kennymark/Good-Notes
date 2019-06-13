@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
-import Header from "./header/header";
+import Header from "../header/header";
 
 
 

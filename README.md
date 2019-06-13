@@ -18,7 +18,7 @@ npm install
 
 ## Usage
 
-```javascript
+```js
   yarn start
 ```
 
@@ -30,7 +30,7 @@ in the authentication tab in the firebase console.
 You need to created a config.js with the credentials you get from firebase.
 It should look something like this
 
-```javascript
+```js
 var config = {
   apiKey: "",
   authDomain: "",
@@ -78,12 +78,12 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 
 ### Main Notes Page
 
-![First Image](./images/main-page.png)
+![](./screenshots/main-page.png)
 
 ### Login & SignUp Page
 
-![](./images/loginsignup.png)
+![](./screenshots/loginsignup.png)
 
 ### Minamalistic Add Notes Pages
 
-![](./images/addnotespage.png)
+![](./screenshots/addnotespage.png)
