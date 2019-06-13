@@ -3,18 +3,17 @@ import "./styles.css";
 import { Link, Redirect } from "react-router-dom";
 
 class Header extends Component {
+
   signOut = () => {
-    var user = localStorage.getItem("user");
-    //localStorage.removeItem("user");
-    console.log(this.props.location);
-    return <Link to="/login" />;
+    var user = localStorage.getItem('user')
+    localStorage.removeItem("user");
+    window.location.replace('/login')
   };
 
   getVal(e) {
     return this.props.findNotes(e.target.value);
-
-    //console.log(this.refs.searchvalue.value)
   }
+
   render() {
     return (
       <div className="header">

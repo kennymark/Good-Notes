@@ -1,26 +1,23 @@
 import React, { Component } from "react";
-//import { Link, Redirect } from "react-router-dom";
 import * as firebase from "firebase";
 
 class Login extends Component {
   constructor(props) {
     super(props);
+    this.auth = firebase.auth()
+    this.email = this.refs.email.value;
+    this.password = this.refs.password.value;
     this.state = {
       loggedIn: false,
       error: "",
       success: ""
     };
   }
+
   signup = e => {
     e.preventDefault();
-
-    const auth = firebase.auth();
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then(user => {
+    this.auth.createUserWithEmailAndPassword(this.email, this.password)
+    .then(user => {
         console.log(user);
         this.setState({
           success: "User has been created sucesssfully"
@@ -34,19 +31,10 @@ class Login extends Component {
 
   login = e => {
     e.preventDefault();
-
-    const auth = firebase.auth();
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        localStorage.setItem("user", JSON.stringify(user));
-        this.setState({
-          loggedIn: true
-        });
-        window.location = "/";
-        console.log(user);
+    this.auth.signInWithEmailAndPassword(this.email, this.password)
+      .then(user => {localStorage.setItem("user", JSON.stringify(user));
+        this.setState({loggedIn: true});
+        window.location.replace('/')
       })
       .catch(err => {
         this.setState({
@@ -54,7 +42,7 @@ class Login extends Component {
         });
       });
   };
-  componentDidMount = () => {};
+
 
   render() {
     return (

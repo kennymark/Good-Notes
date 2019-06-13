@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Login from "./login";
 import * as firebase from "firebase";
 
 class Editnote extends Component {
@@ -22,7 +21,6 @@ class Editnote extends Component {
         content: data.val().text
       });
     });
-
   }
 
   getContent = e => {
@@ -41,7 +39,7 @@ class Editnote extends Component {
     singleNote.update({
       title: this.state.title,
       text: this.state.content,
-      date: (new Date().toDateString())
+      date: new Date().toDateString()
     });
   }
 
