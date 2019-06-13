@@ -31,24 +31,25 @@ class Main extends Component {
   }
 
   delete = (note) => {
+    console.log(note)
     const singleNote = firebase.database().ref("notes").child(note);
     singleNote.remove();
+    this.forceUpdate()
   }
 
   findNotes(query) {
     const notes = document.querySelectorAll(".note");
     notes.forEach(note => {
-      if (note.innerText.toLowerCase().includes(query.toLowerCase())) {
+      if (note.innerText.toLowerCase().includes(query.toLowerCase()))
         note.style.display = "flex";
-      } else {
-        note.remove()
-      }
+      else
+        note.style.display = "none";
     });
   }
 
   render() {
-    var notes = this.state.data;
-    var keys = Object.keys(notes);
+    const notes = this.state.data;
+    const keys = Object.keys(notes);
 
     return (
       <Fragment>
@@ -60,36 +61,29 @@ class Main extends Component {
               <li>Projects</li>
               <li>Business</li>
               <li>Personal</li>
-              <Link to="/addnote">
+              <Link to="/add-note">
                 <li>
-                  {" "}
-                  {/* <i className="ion-ios-plus-outline"></i> */}
                   Add a note
                 </li>
               </Link>
             </ul>
             <div className="notes">
-              {keys.reverse().map((note, index) => {
-                return (
-                  <Link
-                    to={`/editnote/${note}`}
-                    className="singlenote"
-                    key={index}>
-                    <div className="note" key={note}>
+              {keys.reverse().map((note, i) => (
+                <span>
+                  <div className="note">
+                    <Link to={`/edit-note/${note}`} className="singlenote" key={i}>
                       <h1 className="title">{String(notes[note].title)}</h1>
                       <p className="content">
                         {notes[note].text.substr(0, 110)} ...
                       </p>
                       <p className="date">{notes[note].date}</p>
                       <p className="date">{notes[note].updatedAt}</p>
-                      <i
-                        className="ion-ios-trash-outline delete"
-                        onClick={() => this.delete(notes[note])}
-                      />
-                    </div>
-                  </Link>
-                );
-              })}
+                    </Link>
+                  </div>
+                  <i className="ion-ios-trash-outline delete"
+                    onClick={() => this.delete(note)} />
+                </span>
+              ))}
             </div>
           </div>
         </div>

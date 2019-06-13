@@ -15,8 +15,8 @@ const Routes = () => (
           : (<App />)
       )} />
       <Route path="/login" component={Login} />
-      <Route path="/addnote" component={AddNote} />
-      <Route path="/editnote/:noteid" component={EditNote} />
+      <Route path="/add-note" component={AddNote} />
+      <Route path="/edit-note/:id" component={EditNote} />
 
     </Switch>
   </Router>

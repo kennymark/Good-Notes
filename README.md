@@ -64,7 +64,8 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 - [x] Modal to edit the info
 - [ ] File Upload
 - [ ] Maybe a quill like editor: implemented earlier but had to remove due to issues
-
+- [X] Fix deletion, deletes but tries to edit at the same time due to position of the delete button
+ 
 ## Components
 
 1.  main.js : The page where all notes are displayed

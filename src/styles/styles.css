@@ -21,19 +21,23 @@ body {
   color: white;
   padding-left: 0;
 }
+
 .sidebar ul li {
   padding: 15px 0;
   font-weight: bold;
 }
+
 .sidebar ul li i {
   margin-right: 20px;
 }
+
 .deep {
   background: #6a61c0;
   height: 71px;
   width: 100%;
   position: absolute;
 }
+
 .header {
   width: 85%;
   height: 70px;
@@ -43,9 +47,11 @@ body {
   justify-content: flex-start;
   align-items: center;
 }
+
 i {
   font-size: 30px;
 }
+
 input {
   outline: none;
   height: 70%;
@@ -57,6 +63,7 @@ input {
   font-weight: bold;
   border: 0;
 }
+
 .searchcon {
   position: absolute;
   left: 18%;
@@ -68,24 +75,29 @@ input {
   margin-right: 20px;
   font-size: 17px;
 }
+
 .user a {
   text-decoration: none;
 }
+
 .container {
   width: 85%;
   float: right;
   background: #f9f9f9;
   min-height: 100vh;
 }
+
 .main {
   width: 90%;
   margin: 0 auto;
   padding: 50px 0;
 }
+
 .categories {
   list-style: none;
   display: flex;
 }
+
 .categories li {
   font-size: 18px;
   font-weight: bold;
@@ -95,26 +107,31 @@ input {
   cursor: pointer;
   color: #616161;
 }
+
 .categories li:hover {
   transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
   color: black;
 }
+
 .categories a {
   position: absolute;
   right: 5%;
   text-decoration: none;
 }
+
 .active {
   background: #6a61c0;
   color: white !important;
   border-radius: 4px;
 }
+
 .notes {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-auto-rows: 300px;
   grid-gap: 1em;
 }
+
 .note {
   background: #fff;
   box-shadow: 2px 3px 4px #efefef;
@@ -122,29 +139,30 @@ input {
   border: 2px solid #efefefb3;
   display: flex;
   flex-direction: column;
-  justify-content: center;
   align-items: center;
   overflow: hidden;
   height: 300px;
 }
 
 .note .title {
-  position: relative;
-  top: 10px;
-  width: 80%;
   font-size: 22px;
   color: #8981d8;
+  text-align: center;
 }
+
 .note .content {
   padding: 0 20px;
   height: 80%;
   color: #504f4f;
   font-family: Nunito;
 }
+
 .note .date {
   color: darkgray;
   font-weight: bold;
+  text-align: center;
 }
+
 .note:hover {
   transform: scale(1, 1.03);
   box-shadow: 6px 7px 6px #d3d3d3;
@@ -158,6 +176,7 @@ input {
   justify-content: center;
   align-items: center;
 }
+
 .login input {
   width: 600px;
   height: 40px;
@@ -165,9 +184,11 @@ input {
   margin: 20px 0;
   border: 1px solid #efefef;
 }
+
 .login label {
   width: 100px;
 }
+
 .login .btn {
   width: 110px;
   background: khaki;
@@ -177,10 +198,12 @@ input {
   border: 0;
   cursor: pointer;
 }
+
 .login .signup {
   background: darkturquoise;
   margin-left: 15px;
 }
+
 .addnote {
   height: 100vh;
   display: flex;
@@ -188,6 +211,7 @@ input {
   justify-content: center;
   align-items: center;
 }
+
 .addnote input {
   width: 900px;
   border: 0 !important;
@@ -198,10 +222,12 @@ input {
   font-size: 30px;
   font-family: Nunito;
 }
+
 .addnote input:focus {
   border-bottom: 2px solid lightgreen !important;
   transition: all 0.3s;
 }
+
 .addnote .save {
   margin-top: 74px;
   height: 40px;
@@ -211,6 +237,7 @@ input {
   color: white;
   font-size: inherit;
 }
+
 .editor {
   margin: 0px;
   height: 588px;
@@ -221,6 +248,7 @@ input {
   font-size: 17px;
   font-family: Source Code Pro;
 }
+
 .btnout {
   color: white;
   background: #6960c0;
@@ -231,21 +259,28 @@ input {
   min-width: 69px;
   margin-right: 10px;
 }
+
 .btnout:hover {
   transition: background 0.5s ease;
   background: darkmagenta;
 }
+
 .delete {
-  align-self: flex-end;
-  margin-right: 25px;
-  margin-top: -50px;
   color: red;
+  position: relative;
+  top: -44px;
+  float: right;
+  right: 10px;
+  cursor: pointer;
 }
-.delete:hover{
+
+.delete:hover {
   transition: transform .4s cubic-bezier(0.19, 1, 0.22, 1);
   transform: scale(1.5)
 }
+
 .singlenote {
   color: none;
   text-decoration: none;
+  height: 80%;
 }
