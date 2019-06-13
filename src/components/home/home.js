@@ -1,12 +1,14 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
 import * as firebase from "firebase";
-import Login from "./login";
-import config from "./../config";
-import Header from "./header";
-firebase.initializeApp(config);
+import Header from "./header/header";
+
+
 
 class Main extends Component {
+
+  db = firebase.database().ref("notes")
+
   state = {
     isMounted: false,
     searchVal: "",
@@ -15,37 +17,31 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    var localnotes = localStorage.getItem("notes");
+    const localnotes = localStorage.getItem("notes");
     this.getData(localnotes);
   }
 
-  getData(localnotes) {
-    var user = localStorage.getItem("user");
-    const db = firebase.database().ref("notes");
-
-    db.on("value", data => {
-      var notes = data.val();
+  getData = (localnotes) => {
+    this.db.on("value", data => {
+      const notes = data.val();
       this.setState({ data: notes });
       this.setState({ localnotes });
       localStorage.setItem("notes", JSON.stringify(notes));
     });
   }
 
-  delete(note) {
-    const singleNote = firebase
-      .database()
-      .ref("notes")
-      .child(note);
+  delete = (note) => {
+    const singleNote = firebase.database().ref("notes").child(note);
     singleNote.remove();
   }
 
   findNotes(query) {
-    var notes = document.querySelectorAll(".note");
+    const notes = document.querySelectorAll(".note");
     notes.forEach(note => {
       if (note.innerText.toLowerCase().includes(query.toLowerCase())) {
         note.style.display = "flex";
       } else {
-        note.style.display = "none";
+        note.remove()
       }
     });
   }
@@ -88,7 +84,7 @@ class Main extends Component {
                       <p className="date">{notes[note].updatedAt}</p>
                       <i
                         className="ion-ios-trash-outline delete"
-                        onClick={() => this.delete(note)}
+                        onClick={() => this.delete(notes[note])}
                       />
                     </div>
                   </Link>

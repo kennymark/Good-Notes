@@ -1,27 +1,24 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Redirect } from "react-router-dom";
 import App from "./App";
-import Login from "./components/login";
-import AddNote from "./components/addNote";
-import EditNote from "./components/editNote";
+import Login from "./components/login/login";
+import AddNote from "./components/add-note/add-note";
+import EditNote from "./components/edit-note/edit-note";
 
 const user = localStorage.getItem('user');
 const Routes = () => (
-  
-  <Router>
-      <Switch>
-        <Route exact path="/" render={()=> (
-           !user ? (
-            <Redirect to="/login"/>
-          ) : (
-            <App/>
-          )
-        )} />
-        <Route path="/login" component={Login} />
-        <Route path="/addnote" component={AddNote} />
-        <Route path="/editnote/:noteid" component={EditNote} />
 
-      </Switch>
+  <Router>
+    <Switch>
+      <Route exact path="/" render={() => (
+        !user ? (<Redirect to="/login" />)
+          : (<App />)
+      )} />
+      <Route path="/login" component={Login} />
+      <Route path="/addnote" component={AddNote} />
+      <Route path="/editnote/:noteid" component={EditNote} />
+
+    </Switch>
   </Router>
 );
 

@@ -1,5 +1,5 @@
-import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import React, { Component } from "./node_modules/react";
+import { Link } from "./node_modules/react-router-dom";
 import * as firebase from "firebase";
 
 class Editnote extends Component {
@@ -28,7 +28,8 @@ class Editnote extends Component {
     this.setState({ [target.name]: target.value });
   };
 
-  editNote() {
+
+  editNote = () => {
     const path = this.props.location.pathname;
     const id = path.toString().substr(10);
     var singleNote = firebase
@@ -72,7 +73,7 @@ class Editnote extends Component {
                 type="submit"
                 value="Edit Note"
                 className="save"
-                onClick={this.editNote.bind(this)}
+                onClick={this.editNote}
               />
             </Link>
           </div>

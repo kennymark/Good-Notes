@@ -1,4 +1,4 @@
-var config = {
+const config = {
   apiKey: "AIzaSyB6m_iCtkGk1IAvhKWqszh1Azb4PTu9eRM",
   authDomain: "kensolutions-1176.firebaseapp.com",
   databaseURL: "https://kensolutions-1176.firebaseio.com",

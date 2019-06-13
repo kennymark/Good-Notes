@@ -1,6 +1,6 @@
 import React, { Component, Fragment } from "react";
 import Sidebar from "./components/sidebar";
-import Main from "./components/main";
+import Main from "./components/home/home";
 
 class App extends Component {
   render() {
