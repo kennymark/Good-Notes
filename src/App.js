@@ -1,16 +1,18 @@
-import React, { Component, Fragment } from "react";
+import React, { Fragment } from "react";
 import Sidebar from "./components/sidebar";
 import Main from "./components/home/home";
+import config from './config'
+import * as firebase from 'firebase'
 
-class App extends Component {
-  render() {
-    return (
-      <Fragment>
-        <Sidebar />
-        <Main />
-      </Fragment>
-    );
-  }
+firebase.initializeApp(config);
+
+function App() {
+  return (
+    <Fragment>
+      <Sidebar />
+      <Main />
+    </Fragment>
+  )
 }
 
 export default App;

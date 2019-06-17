@@ -1,6 +1,6 @@
 # Good Notes
 
-Good notes is a complete single page application written completely in React with React router for routing.
+Good notes is a complete single page application written completely in React and Firebase. 
 It is a notes app that anyone can use and extend as it is very modular. Anyone with some JS knowledge could completely add more features to this application. I wanted to have a beautiful notes app that was written by myself and contained the features and simplicity I have always wanted myself. Another reason why I did this was to expound on my react knowlegde. It was my first using react-router;
 
 # Requirements
@@ -13,7 +13,7 @@ It is a notes app that anyone can use and extend as it is very modular. Anyone w
 ## Installation
 
 ```javascript
-npm install
+npm install 
 ```
 
 ## Usage
@@ -23,7 +23,7 @@ npm install
 ```
 
 When you start the application it takes you to the login page, you can either sign in or signup for an account. To do this you need to have
-a firebase account and make sure you have enabled read and write permissons to database. Only make sure you enabled signin with email and password
+a firebase account and make sure you have enabled read and write permissons to database.  Ensure you have enabled signin with email and password
 in the authentication tab in the firebase console.
 
 **Import**
@@ -58,12 +58,14 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 
 - [x] Search Feature
 - [x] Add way to edit
-- [ ] Add more routes
+- [ ] Add tagging features
 - [x] Front-end validation
 - [ ] Mobile version
 - [x] Modal to edit the info
+- [ ] Implement global store
 - [ ] File Upload
 - [ ] Maybe a quill like editor: implemented earlier but had to remove due to issues
+- [X] Make data relational
 - [X] Fix deletion, deletes but tries to edit at the same time due to position of the delete button
  
 ## Components
@@ -73,7 +75,7 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 3.  login.js : duhhh
 4.  addnote: The component responsible for adding notes
 5.  sidebar.js : The sidebar you see
-6.  router.js : Contains all react router definitions for the routers above
+6.  router.js : Contains all router definitions for the routes above
 
 ## Screen shots
 
@@ -85,6 +87,6 @@ Credits: Main page design 98% inspiration from [Valeria Rimkevich](https://dribb
 
 ![](./screenshots/loginsignup.png)
 
-### Minamalistic Add Notes Pages
+### Add Notes Page
 
 ![](./screenshots/addnotespage.png)

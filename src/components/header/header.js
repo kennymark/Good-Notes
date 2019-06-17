@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-
+import { auth } from 'firebase'
+import { withRouter } from 'react-router-dom'
 class Header extends Component {
 
   signOut = () => {
-    localStorage.removeItem("user");
     this.props.history.push('/login')
+    auth().signOut()
   };
 
   getVal = (e) => {
@@ -32,4 +33,4 @@ class Header extends Component {
   }
 }
 
-export default Header;
+export default withRouter(Header)

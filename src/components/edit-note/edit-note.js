@@ -1,45 +1,39 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as firebase from "firebase";
+import { database, auth } from "firebase";
 
 class Editnote extends Component {
+  db = database().ref("notes")
+
   state = {
     title: "",
-    content: ""
+    text: "",
+    currUser: '',
+    id: this.props.match.params.id
   };
 
   componentDidMount() {
-    const path = this.props.location.pathname;
-    const id = path.toString().substr(10);
-    const note = firebase
-      .database()
-      .ref("notes")
-      .child(id);
-    note.on("value", data => {
-      this.setState({
-        title: data.val().title,
-        content: data.val().text
+    auth().onAuthStateChanged((user) => {
+      const { id } = this.state
+      this.setState({ currUser: user })
+      this.db.on("value", data => {
+        const { title, text } = data.val()[user.uid][id]
+        this.setState({ title, text })
       });
     });
   }
 
   getContent = e => {
-    var { target } = e;
+    const { target } = e;
     this.setState({ [target.name]: target.value });
   };
 
 
   editNote = () => {
-    const path = this.props.location.pathname;
-    const id = path.toString().substr(10);
-    var singleNote = firebase
-      .database()
-      .ref("notes")
-      .child(id);
-
+    const { title, text, currUser, id } = this.state
+    const singleNote = this.db.child(currUser.uid)[id];
     singleNote.update({
-      title: this.state.title,
-      text: this.state.content,
+      title, text,
       date: new Date().toDateString()
     });
   }
@@ -50,31 +44,19 @@ class Editnote extends Component {
         <form action="#" method="post">
           <div>
             <label htmlFor="title" /> <br />
-            <input
-              type="text"
-              name="title"
-              placeholder="Title"
-              onChange={this.getContent}
-              value={this.state.title}
-            />
+            <input type="text" name="title" placeholder="Title"
+              onChange={this.getContent} value={this.state.title} />
           </div>
+
           <div>
-            <textarea
-              className="editor"
-              name="content"
-              onChange={this.getContent}
-              value={this.state.content}
-            />
+            <textarea className="editor" sname="text"
+              onChange={this.getContent} value={this.state.text} />
           </div>
 
           <div>
             <Link to="/">
-              <input
-                type="submit"
-                value="Edit Note"
-                className="save"
-                onClick={this.editNote}
-              />
+              <input type="submit" value="Edit Note"
+                className="save" onClick={this.editNote} />
             </Link>
           </div>
         </form>

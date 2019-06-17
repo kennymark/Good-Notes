@@ -1,32 +1,26 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import * as firebase from "firebase";
+import { database, auth } from "firebase";
 
 class Addnote extends Component {
-  db = firebase.database().ref("notes");
+  db = database().ref("notes");
 
   state = { title: "", text: "" };
 
   componentDidMount() {
-    const user = localStorage.getItem("user");
+    const user = auth().currentUser
     if (!user) this.props.history.push('/login');
   }
 
-  getTitle = e => {
-    var title = e.target.value;
-    this.setState({ title });
-  };
-
-  getContent = value => {
-    const content = value.target.value;
-    this.setState({ text: content });
+  getContent = e => {
+    this.setState({ [e.target.name]: e.target.value });
   };
 
   postNote = e => {
-    this.db.push({
+    const { currentUser } = auth()
+    this.db.child(currentUser.uid).push({
       title: this.state.title,
       text: this.state.text,
-      time: new Date(),
       date: new Date().toDateString()
     });
   };
@@ -37,19 +31,14 @@ class Addnote extends Component {
         <form action="#" method="post">
           <div>
             <label htmlFor="title" /> <br />
-            <input type="text" name="title" placeholder="Title" onChange={this.getTitle} />
+            <input type="text" name="title" placeholder="Title" onChange={this.getContent} />
           </div>
           <div>
-            <textarea className="editor" onChange={this.getContent} />
+            <textarea className="editor" onChange={this.getContent} name='text' />
           </div>
           <div>
             <Link to="/">
-              <input
-                type="submit"
-                value="Add Note"
-                className="save"
-                onClick={this.postNote}
-              />
+              <input type="submit" value="Add Note" className="save" onClick={this.postNote} />
             </Link>
           </div>
         </form>

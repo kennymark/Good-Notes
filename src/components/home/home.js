@@ -1,13 +1,13 @@
 import React, { Component, Fragment } from "react";
 import { Link } from "react-router-dom";
-import * as firebase from "firebase";
+import { database, auth } from "firebase";
 import Header from "../header/header";
 
 
 
 class Main extends Component {
-
-  db = firebase.database().ref("notes")
+  db = database().ref("notes")
+  currUser;
 
   state = {
     isMounted: false,
@@ -17,27 +17,26 @@ class Main extends Component {
   };
 
   componentDidMount() {
-    const localnotes = localStorage.getItem("notes");
-    this.getData(localnotes);
+    auth().onAuthStateChanged((user) => {
+      this.currUser = user
+      this.getData()
+    });
   }
 
-  getData = (localnotes) => {
+  getData = () => {
     this.db.on("value", data => {
-      const notes = data.val();
+      const notes = data.val()[this.currUser.uid]
+      if (!notes) return;
       this.setState({ data: notes });
-      this.setState({ localnotes });
-      localStorage.setItem("notes", JSON.stringify(notes));
     });
   }
 
   delete = (note) => {
-    console.log(note)
-    const singleNote = firebase.database().ref("notes").child(note);
+    const singleNote = this.db.child(note);
     singleNote.remove();
-    this.forceUpdate()
   }
 
-  findNotes(query) {
+  findNotes = (query) => {
     const notes = document.querySelectorAll(".note");
     notes.forEach(note => {
       if (note.innerText.toLowerCase().includes(query.toLowerCase()))
@@ -49,11 +48,11 @@ class Main extends Component {
 
   render() {
     const notes = this.state.data;
-    const keys = Object.keys(notes);
+    const keys = Object.keys(notes).reverse();
 
     return (
       <Fragment>
-        <Header findNotes={this.findNotes.bind(this)} />
+        <Header findNotes={this.findNotes} />
         <div className="container">
           <div className="main">
             <ul className="categories">
@@ -61,17 +60,15 @@ class Main extends Component {
               <li>Projects</li>
               <li>Business</li>
               <li>Personal</li>
-              <Link to="/add-note">
-                <li>
-                  Add a note
-                </li>
-              </Link>
+              <li>
+                <Link to="/add-note"> Add a note</Link>
+              </li>
             </ul>
             <div className="notes">
-              {keys.reverse().map((note, i) => (
-                <span>
-                  <div className="note">
-                    <Link to={`/edit-note/${note}`} className="singlenote" key={i}>
+              {keys.map((note, i) => (
+                <span key={i}>
+                  <div className="note" >
+                    <Link to={`/edit-note/${note}`} className="singlenote">
                       <h1 className="title">{String(notes[note].title)}</h1>
                       <p className="content">
                         {notes[note].text.substr(0, 110)} ...

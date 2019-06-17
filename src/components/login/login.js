@@ -1,71 +1,46 @@
 import React, { Component } from "react";
-//import { Link, Redirect } from "react-router-dom";
-import * as firebase from "firebase";
-
+import { auth } from "firebase";
 class Login extends Component {
 
   state = {
-    loggedIn: false,
     error: "",
-    success: ""
+    success: "",
+    email: '', password: ''
   }
 
   signup = e => {
     e.preventDefault();
-
-    const auth = firebase.auth();
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-
-    auth
+    const { email, password } = this.state
+    this.auth
       .createUserWithEmailAndPassword(email, password)
-      .then(user => {
-        console.log(user);
-        this.setState({
-          success: "User has been created sucesssfully"
-        });
-      })
-      .catch(err => {
-        this.setState({ error: err.message });
-        console.log(err.message);
-      });
+      .then(user => this.setState({ msg: "User has been created sucesssfully" }))
+      .catch(err => this.setState({ msg: err.message }));
   };
 
   login = e => {
     e.preventDefault();
-    const auth = firebase.auth();
-    const email = this.refs.email.value;
-    const password = this.refs.password.value;
-
-    auth
-      .signInWithEmailAndPassword(email, password)
-      .then(user => {
-        localStorage.setItem("user", JSON.stringify(user));
-        this.setState({
-          loggedIn: true
-        });
-        window.location = "/";
-        console.log(user);
-      })
-      .catch(err => {
-        this.setState({
-          error: err.message
-        });
-      });
+    const { email, password } = this.state
+    auth().signInWithEmailAndPassword(email, password)
+      .then(user => this.props.history.push(`/`))
+      .catch(err => this.setState({ msg: err.message }));
   };
-  componentDidMount = () => { };
+
+  setUser = (e) => {
+    console.dir(e.target)
+    this.setState({ [e.target.name]: e.target.value })
+  }
+
 
   render() {
     return (
       <div className="login">
-        {this.state.error}
-        {this.state.success}
+        {this.state.msg}
         <form action="#" method="post" onSubmit={this.login}>
           <div>
-            <input type="email" ref="email" placeholder="Enter email here" />
+            <input type="email" name="email" placeholder="Enter email here" onChange={this.setUser} />
           </div>
           <div>
-            <input type="password" ref="password" placeholder="Enter password here" />
+            <input type="password" name="password" placeholder="Enter password here" onChange={this.setUser} />
           </div>
           <div>
             <input type="submit" value="Login" className="btn" onClick={this.login} />
